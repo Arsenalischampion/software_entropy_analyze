@@ -36,7 +36,7 @@ while 1:
         
     df = pandas.DataFrame(entropies)
     writer = pandas.ExcelWriter('commit_{}.xlsx'.format(delta), engine='xlsxwriter')
-    df.to_excel(writer, sheet_name='entropy', index = True)
+    df.to_excel(writer, sheet_name='entropy', index=True)
     writer.save()
 
     delta += 10
@@ -50,6 +50,7 @@ while 1:
 
     print("time delta: {}\n".format(time_delta))
     entropies = []
+    commit_time1 = first_date
     while 1:
         commit_time2 = commit_time1 + datetime.timedelta(days=time_delta)
         if commit_time2 > last_date:
@@ -63,11 +64,11 @@ while 1:
 
         # print('Entropy: {}\n'.format(utils.get_entropy(files)))
 
-    entropies.append(utils.get_entropy(files))
+        entropies.append(utils.get_entropy(files))
 
     df = pandas.DataFrame(entropies)
     writer = pandas.ExcelWriter('time_{}.xlsx'.format(time_delta), engine='xlsxwriter')
-    df.to_excel(writer, sheet_name='entropy', index = True)
+    df.to_excel(writer, sheet_name='entropy', index=True)
     writer.save()
     
     time_delta += 10
